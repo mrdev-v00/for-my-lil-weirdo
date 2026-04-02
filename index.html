@@ -3,51 +3,41 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>For Lil Weirdo 💗</title>
-
-<!-- Cute Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
 body {
   margin: 0;
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Segoe UI', sans-serif;
   background: linear-gradient(135deg, #ffd6e7, #ffe6f0);
-  overflow-y: auto;
-}
-
-/* Center everything */
-.container {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  width: 90%;
-  max-width: 700px;
-  margin: auto;
-  padding: 20px;
   text-align: center;
 }
 
-/* Title */
-h2 {
-  font-family: 'Pacifico', cursive;
-  color: #ff4da6;
-  font-size: 28px;
+/* Container */
+.container {
+  padding: 20px;
+  max-width: 700px;
+  margin: auto;
+  margin-top: 5vh;
 }
 
-/* Text */
-p {
-  font-size: 17px;
-  line-height: 1.7;
-  color: #333;
-  background: rgba(255,255,255,0.5);
-  padding: 15px;
+/* Images */
+.gallery img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  margin: 10px;
   border-radius: 15px;
-  backdrop-filter: blur(10px);
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.gallery img:hover,
+.gallery img.active {
+  transform: scale(1.5);
+  z-index: 999;
+  position: relative;
+  box-shadow: 0 0 25px #ff66aa;
 }
 
 /* Buttons */
@@ -57,28 +47,11 @@ button {
   border: none;
   border-radius: 20px;
   background: #ff99cc;
-  color: white;
-  font-weight: bold;
   cursor: pointer;
-  box-shadow: 0 0 10px #ff99cc;
 }
 
 button:hover {
   background: #ff66aa;
-}
-
-/* Gallery */
-
-/* Music Button */
-.music-btn {
-  position: fixed;
-  bottom: 15px;
-  right: 15px;
-  background: #ff66aa;
-  padding: 10px 15px;
-  border-radius: 20px;
-  color: white;
-  font-size: 14px;
 }
 
 /* Hearts */
@@ -92,7 +65,6 @@ button:hover {
   0% { transform: translateY(0); opacity: 1; }
   100% { transform: translateY(-100vh); opacity: 0; }
 }
-
 </style>
 </head>
 
@@ -104,31 +76,35 @@ button:hover {
 
 <div class="container" id="content"></div>
 
-<button class="music-btn" onclick="toggleMusic()">🎵 Music</button>
-
 <script>
 
-// music
 let music = document.getElementById("music");
 music.volume = 0;
 
-function playMusic(){
+// 🎵 fade in
+function playMusic() {
   music.play().catch(()=>{});
-  let v=0;
-  let fade=setInterval(()=>{
-    if(v<0.5){ v+=0.01; music.volume=v; }
-    else clearInterval(fade);
+  let v = 0;
+  let fade = setInterval(()=>{
+    if(v < 0.5){
+      v += 0.01;
+      music.volume = v;
+    } else clearInterval(fade);
   },200);
 }
 
+// 🎵 toggle
 function toggleMusic(){
-  if(music.paused) music.play();
-  else music.pause();
+  if(music.paused){
+    music.play();
+  } else {
+    music.pause();
+  }
 }
 
-// hearts
+// 💖 hearts
 setInterval(()=>{
-  let h=document.createElement("div");
+  let h = document.createElement("div");
   h.className="heart";
   h.innerHTML="💗";
   h.style.left=Math.random()*100+"vw";
@@ -137,7 +113,7 @@ setInterval(()=>{
   setTimeout(()=>h.remove(),6000);
 },500);
 
-// typing
+// ⌨️ typing
 function typeText(text, cb){
   let i=0;
   content.innerHTML="<p id='t'></p>";
@@ -160,18 +136,24 @@ function nextBtn(fn){
   content.appendChild(b);
 }
 
-// intro
+// 🎬 Intro (with images)
 function intro(){
   content.innerHTML=`
-  <h2>Hey lil weirdo 💗</h2>
+  <h2>Hey..... lil weirdo 🤣</h2>
 
+  <div class="gallery">
+    <img src="pic1.jpg" onclick="this.classList.toggle('active')">
+    <img src="pic2.jpg" onclick="this.classList.toggle('active')">
+    <img src="pic3.jpg" onclick="this.classList.toggle('active')">
+  </div>
 
   <p>its your birthday and im forgetting to wish you on it. Good luck 🤣🤣</p>
 
   <button onclick="start()">Continue</button>
+  <button onclick="toggleMusic()">Play / Stop Music 🎵</button>
   `;
 }
-
+  
 // start
 function start(){
   playMusic();
