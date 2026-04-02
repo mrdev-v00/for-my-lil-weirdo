@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Lil Weirdo 💗</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #ffd6e7, #ffe6f0);
+  text-align: center;
+}
+
+/* Container */
+.container {
+  padding: 20px;
+  max-width: 700px;
+  margin: auto;
+  margin-top: 5vh;
+}
+
+/* Buttons */
+button {
+  padding: 10px 20px;
+  margin: 10px;
+  border: none;
+  border-radius: 20px;
+  background: #ff99cc;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #ff66aa;
+}
+
+/* Hearts */
+.heart {
+  position: fixed;
+  bottom: -10px;
+  animation: floatUp 6s linear infinite;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-100vh); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<audio id="music" loop>
+  <source src="humdum.mp3" type="audio/mp3">
+</audio>
+
+<div class="container" id="content"></div>
+
+<script>
+
+let music = document.getElementById("music");
+music.volume = 0;
+
+// 🎵 fade in
+function playMusic() {
+  music.play().catch(()=>{});
+  let v = 0;
+  let fade = setInterval(()=>{
+    if(v < 0.5){
+      v += 0.01;
+      music.volume = v;
+    } else clearInterval(fade);
+  },200);
+}
+
+// 🎵 toggle
+function toggleMusic(){
+  if(music.paused){
+    music.play();
+  } else {
+    music.pause();
+  }
+}
+
+// 💖 hearts
+setInterval(()=>{
+  let h = document.createElement("div");
+  h.className="heart";
+  h.innerHTML="💗";
+  h.style.left=Math.random()*100+"vw";
+  h.style.fontSize=(15+Math.random()*20)+"px";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),6000);
+},500);
+
+// ⌨️ typing
+function typeText(text, cb){
+  let i=0;
+  content.innerHTML="<p id='t'></p>";
+  let p=document.getElementById("t");
+
+  function type(){
+    if(i<text.length){
+      p.innerHTML+=text.charAt(i);
+      i++;
+      setTimeout(type,15);
+    } else if(cb) cb();
+  }
+  type();
+}
+
+function nextBtn(fn){
+  let b=document.createElement("button");
+  b.innerText="Next ➜";
+  b.onclick=fn;
+  content.appendChild(b);
+}
+
+// 🎬 Intro (with images)
+function intro(){
+  content.innerHTML=`
+  <h2>Hey..... lil weirdo 🤣</h2>
+
+  <p>its your birthday and im forgetting to wish you on it. Good luck 🤣🤣</p>
+
+  <button onclick="start()">Continue</button>
+  <button onclick="toggleMusic()">Play / Stop Music 🎵</button>
+  `;
+}
+  
+// start
+function start(){
+  playMusic();
+  ready();
+}
+
+// ready
+function ready(){
+  content.innerHTML=`
+  <h2>Are you ready?</h2>
+  <button onclick="scene1()">Yes</button>
+  <button onclick="scene1()">Still Yes</button>
+  <p>DONT FORGET THAT I WILL ANNOY YOU FOR THE REST OF YOUR LIFE 😌</p>
+  `;
+}
+
+// scenes same as before (kept untouched for your paragraphs)
+
+function scene1(){ typeText(`So it was just a random day, you were here in Karachi arguing with other family members over which car is better and I was busy using the laptop in a corner and your voice...ill say that was a little too annoying 🤣 
+
+...jk, my brother and you came to me asking for my opinion then you dragged me out of the corner and you started arguing with my brother over it again and then after listening to your opinions (no one asked for 🤣) i took part in it too, then later that day we both went to super market to buy some snacks (a complete chapter itself 🤣🤣) where we talked the whole time and two lil dumbos i wont mention were not letting us talk and they both were fighting themselves and pulled us in it too. we were jst some peaceful creatures.
+
+I DIDINT KNEW THAT THERES A WEIRDO JST LIKE ME IN MY FAMILY.`,()=>nextBtn(scene2)); }
+function scene2(){ typeText(`so it was day 2 of our friendship when we went to super market. i was in my fv blue jeans and blue shirt while u were wearing ur signature pink jacket, with your black suit. with two lil weirdos with us, your sister and my brother. they both are dumb and thats the only thing we both agree on at once. 
+
+so we jst started walking to the market. we got out of our house and those lil dumb weirdos i wont take name off started fighting with each other, arguing over who is better then somehow we both managed to talk for 2 or 3 minutes in a 15 minutes long journey.
+
+this was pretty normal till we entered the mall. at first we didnt knew why we were there we jst knew we want some snacks but what snacks..didnt knew it, we went to noodles section directly dont know why, we picked our choices and then it was the turn of those weirdos.
+
+one of them wanted something which is in the basement of mart, we decided to go there went on escalator and that lil weirdo who wanted that snack was too scared to get on escalator, and we realised it when we went down in that area.
+
+and we can literally see him from the railing waiting for us to come back we came up and then we saw down and that weirdo was down there (he managed to find stairs).
+
+then we waited and he got up there with the snack he wanted. and as we saw the snack in his hand it was the same thing we got from upstairs but in different flavour, and that flavour was a feet away from ours...
+
+then one of the other dumbo wanted to get a drink she went to cold drink section and picked the one she thought will be good. and as the price was telling it..it was not good 🤣🤣 and she have to drink all of that HAHAH.
+
+then when we were going back those two lil weirdos saw the sun and got their energy. and same thing happened...THOSE WEIRDOS STARTED FIGHTING AGAIN.
+
+How are you even bearing that lil weirdo?`,()=>nextBtn(scene3)); }
+function scene3(){ typeText(`I dont even remember properly, but i know it was my mistake. you asked me that we wont talk much on chat and I was not letting go without knowing the reason, we both started arguing over it and to stop the argument you blocked me.
+
+our friendship was same as before but we stopped contacting each other cuz of some issues.
+
+Later I wanted some help so I sent a message to you through that lil weirdo and you came back instantly and asked me abt the problem, solved it with me and then I introduced someone to you.
+
+🤣 Peak Us fight`,()=>nextBtn(scene4)); }
+function scene4(){ typeText(`I can't list every single thing you have done so far till now, you know how clumsy you are and I am aware of that very well too.
+
+Once you were passing by a street and one of you friend lived there, that lil weirdo who was sitting behind you on the scootie, yelled at that boy with the worst nickname if I remember correctly.
+
+you were trying to find the location of the street and you were there in front of that alienware kid, and worst of all that nickname yelled on his face.
+
+after which you tried to turn on the scootie and it took a couple of tries 🤣🤣 and then you flew the scootie out of that place.
+
+and that alienware tell me how can somone stay outside of house all the time??
+
+Bet he is so unemployed that he acts as a street guard with no pay 🤣🤣`,()=>nextBtn(scene5)); }
+function scene5(){ typeText(`it was the time when we fought, i needed your help and asked for it. you came online and asked me for what it was and I told you everything abt that person, and the amount of confessions i was getting so you helped me with it and I made a group of that one person, you and me.
+
+you both started talking and i went off for a couple of minutes. you both soon became friends lets jst say that.
+
+then YOU being a sister you made a call in the group a voice call, and you kept insisting me to come on the call.
+
+*I was on speakers the whole time*  
+*Earpods died mid way*  
+*I was sitting with the family members*
+
+I was abt to get grounded but didnt happened hehe 🤣🤣
+
+then to tease me even more...you made an excuse and left me in the voice call with that person...
+
+it was my first call, i was kinda nervous and that support you gave...
+
+forever grateful to have you.
+
+imagine if someone else heard the voice 🤣`,()=>nextBtn(finalScene)); }
+
+function finalScene(){
+  typeText(`Out of all these moments... I didn’t realize when you became this important to me.`,()=>nextBtn(finalMsg));
+}
+
+function finalMsg(){
+  content.innerHTML=`
+  <h2>Happy Birthday 💗</h2>
+  <p>
+  I am grateful to have you on my side,💞<br><br>
+  I remember every single detail of everything...🫶❤️‍🔥 <br><br>
+  Thank you my cute lil sister 🫠🫠 <br><br>
+  ik im annoying but that wont change anything, HEHEHHEE <br> <br>
+  You are the best!! 🥰
+  </p>`;
+}
+
+intro();
+
+</script>
+
+</body>
+</html>
